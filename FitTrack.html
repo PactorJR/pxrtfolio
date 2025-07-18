@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnapFolio - Personal Portfolio Template</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #c8a97e;
+      --dark-color: #111111;
+      --dark-secondary: #1a1a1a;
+      --card-bg: #1e1e1e;
+      --text-color: #ffffff;
+      --text-secondary: #999999;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--dark-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    
+    /* Main content styles */
+    .main-content {
+      padding: 40px;
+      min-height: 100vh;
+    }
+    
+    /* About section */
+    .about-section {
+      padding: 80px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+    
+    .section-title {
+      position: relative;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    .section-title h2 {
+      font-size: 36px;
+      font-weight: 700;
+      display: inline-block;
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .section-title img {
+      width: 100%;
+      max-width: 160px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    .section-title img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .about-card {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .about-image {
+      border-radius: 50%;
+      overflow: hidden;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 30px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .about-info h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    .about-info p.role {
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+    .contact-info {
+      margin: 25px 0;
+    }
+    
+    .contact-info .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      color: var(--text-secondary);
+    }
+    
+    .contact-info .info-item i {
+      width: 25px;
+      margin-right: 15px;
+      color: var(--primary-color);
+    }
+    
+    /* Social icons */
+    .social-icons {
+      margin-top: 30px;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-color);
+      margin-right: 10px;
+      transition: all 0.3s;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      padding: 12px 30px;
+      border-radius: 30px;
+      color: var(--text-color);
+      font-weight: 600;
+      margin-right: 15px;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+      background-color: #b89969;
+      border-color: #b89969;
+      color: var(--dark-color);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 30px;
+      border-radius: 30px;
+      color: var(--text-color);
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .btn-outline:hover {
+      border-color: var(--text-color);
+    }
+    
+    /* Stats boxes */
+    .stats-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      justify-content: center;
+    }
+    
+    .stat-box {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 25px 15px;
+      text-align: center;
+      flex: 1;
+      margin: 10px;
+      min-width: 120px;
+    }
+    
+    .stat-box-icon {
+      font-size: 24px;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    
+    .stat-box-number {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .stat-box-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    /* Skill progress bars */
+    .skill-progress {
+      margin-bottom: 20px;
+    }
+    
+    .skill-progress-title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .skill-progress-bar {
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .skill-progress-fill {
+      height: 100%;
+      background-color: var(--primary-color);
+    }
+    
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+    
+    .skill-group {
+      flex: 0 0 48%;
+      margin-bottom: 30px;
+    }
+    
+    .skill-title {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    .skill-content {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .btn-download {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .btn-download i {
+      margin-right: 10px;
+    }
+    
+    .btn-talk {
+      background-color: transparent;
+      color: var(--text-color);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 15px;
+    }
+    
+    .btn-talk i {
+      margin-right: 10px;
+    }
+    
+    .btn-download:hover {
+      background-color: #b89969;
+    }
+    
+    .btn-talk:hover {
+      border-color: var(--text-color);
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      z-index: 999;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    
+    .back-to-top:hover {
+      background-color: #b89969;
+      transform: translateY(-5px);
+    }
+
+    /* Portfolio section */
+    .portfolio-section {
+      padding: 80px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .portfolio-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    
+    .portfolio-category {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: none;
+      padding: 8px 20px;
+      margin: 0 5px 10px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .portfolio-category.active,
+    .portfolio-category:hover {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+    }
+    
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    
+    .portfolio-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: var(--card-bg);
+      cursor: pointer;
+    }
+    
+    .portfolio-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .portfolio-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      transition: all 0.3s;
+    }
+    
+    .portfolio-category-label {
+      color: var(--primary-color);
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    
+    .portfolio-title {
+      color: var(--text-color);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .portfolio-actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    .action-button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .action-button:hover {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+    }
+
+    /* Pagination Styles */
+    .pagination-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        gap: 10px;
+    }
+
+    .pagination-btn {
+        background-color: var(--dark-secondary);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .pagination-btn:hover {
+        background-color: var(--primary-color);
+    }
+
+    .pagination-btn:disabled {
+        background-color: var(--dark-color);
+        border: 1px solid #333;
+        cursor: not-allowed;
+    }
+
+    .pagination-btn:disabled:hover {
+      border: 1px solid #fff;
+      transition: all 0.3s ease;
+    }
+
+    #pagination-numbers {
+        display: flex;
+        gap: 5px;
+    }
+
+    .page-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .page-number:hover {
+      border: 1px solid #fff;
+      transition: all 0.3s ease;
+    }
+
+    .page-number.active {
+        background-color: var(--primary-color);
+        color: var(--text-color);
+    }
+    
+    /* Modal Styles */
+    .portfolio-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 20px;
+    }
+    
+    .modal-content {
+        position: relative;
+        margin: auto;
+        width: 90%;
+        max-width: 800px;
+        background-color: var(--card-bg);
+        border-radius: 12px;
+        overflow: hidden;
+        animation: modalOpen 0.3s;
+    }
+    
+    @keyframes modalOpen {
+        from {opacity: 0; transform: scale(0.9);}
+        to {opacity: 1; transform: scale(1);}
+    }
+    
+    .modal-image-container {
+        width: 100%;
+        text-align: center;
+        background-color: var(--dark-color);
+    }
+    
+    .modal-image {
+        max-width: 100%;
+        max-height: 70vh;
+        object-fit: contain;
+    }
+    
+    .modal-description {
+        padding: 20px;
+        color: var(--text-color);
+    }
+    
+    .modal-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+    
+    .modal-close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 24px;
+        color: var(--text-color);
+        background: rgba(0, 0, 0, 0.5);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        z-index: 10;
+    }
+    
+    .modal-close:hover {
+        background-color: var(--primary-color);
+        color: var(--dark-color);
+    }
+    
+    .modal-category {
+        font-size: 14px;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .main-content {
+        padding: 20px;
+      }
+      
+      .skill-group {
+        flex: 0 0 100%;
+      }
+      
+      .about-card {
+        padding: 25px;
+      }
+      
+      .stat-box {
+        min-width: 140px;
+      }
+      
+      .modal-content {
+        width: 95%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .modal-image {
+        max-height: 50vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Content -->
+  <div class="main-content">
+    
+    <!-- FitTrack Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-title">
+            <img src="assets/img/FitTrack_Logo.png" alt="Resume Image"/>
+          <h2>FitTrack CCAT Application</h2>
+        </div>
+        
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <div class="about-card">
+              <div class="about-image">
+                <img src="assets/img/DSC_8574_Smaller.JPG" alt="Profile Image"/>
+              </div>
+              
+              <div class="about-info">
+                <h2>JR Galvez Pactor</h2>
+                <p class="role">Web/Application Back-end Developer</p>
+                
+                <div class="contact-info">
+                  <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>ahwa.pactorjr@gmail.com</span>
+                  </div>
+                  
+                  <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+63 951 633 2994</span>
+                  </div>
+                  
+                  <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Imus Cavite, PH</span>
+                  </div>
+                </div>
+                
+                <div class="social-icons text-center">
+                  <a href="#" style="text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#" style="text-decoration: none;"><i class="fab fa-twitter"></i></a>
+                  <a href="#" style="text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                  <a href="#" style="text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-8">
+            <div class="about-content">
+              
+              <h2>FitTrack offers a modern solution.</h2>
+              
+              <p>With digital check-ins, easy payments, equipment tracking, and personalized fitness guidance.</p>
+              
+              <p>The CCAT Fitness Gym at Cavite State University -- CCAT Campus faces issues due to its manual processes, lack of membership tracking, limited equipment, and inconvenient payment methods. These problems discourage student participation and make gym management difficult.</p>
+
+              <h3 class="mt-5 mb-4">Project Contribution</h3>
+              
+              <div class="row mt-4">
+                <div class="col-md-6">
+                  <h5>Front-end Development</h5>
+                  
+                  <div class="skill-progress">
+                    <div class="skill-progress-title">
+                      <span>Dart</span>
+                      <span>75%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                      <div class="skill-progress-fill" style="width: 75%;"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="skill-progress">
+                    <div class="skill-progress-title">
+                      <span>Flutter</span>
+                      <span>50%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                      <div class="skill-progress-fill" style="width: 50%;"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <h5>Back-end Development</h5>
+                  
+                  <div class="skill-progress">
+                    <div class="skill-progress-title">
+                      <span>Firebase</span>
+                      <span>85%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                      <div class="skill-progress-fill" style="width: 85%;"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="skill-progress">
+                    <div class="skill-progress-title">
+                      <span>Kotlin</span>
+                      <span>70%</span>
+                    </div>
+                    <div class="skill-progress-bar">
+                      <div class="skill-progress-fill" style="width: 70%;"></div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="mt-5">
+                <a href="Portfolio.html#portfolio" style="text-decoration: none;" class="btn-download" >
+                  <i class="fas fa-arrow-left "></i> Back
+                </a>
+                
+                <a href="Portfolio.html#contact" style="text-decoration: none;" class="btn-talk">
+                    <i class="fas fa-comment"></i> Let's Talk
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="section-title">
+          <h2>FitTrack CCAT Features</h2>
+      </div>
+          
+      <div class="portfolio-categories">
+          <button class="portfolio-category active" data-category="all">All Features</button>
+          <button class="portfolio-category" data-category="User">User Side</button>
+          <button class="portfolio-category" data-category="Admin">Admin Side</button>
+      </div>
+          
+      <div class="portfolio-grid" id="portfolio-grid">
+          <!-- Portfolio Item 1 -->
+          <div class="portfolio-item" data-category="General">
+              <img src="assets/FitTrack/Login.png" alt="Login screen">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">General</div>
+                  <h3 class="portfolio-title">Login</h3>
+              </div>
+          </div>
+          
+          <!-- Portfolio Item 2 -->
+          <div class="portfolio-item" data-category="General">
+              <img src="assets/FitTrack/Registration.png" alt="Registration screen">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">General</div>
+                  <h3 class="portfolio-title">Registration</h3>
+              </div>
+          </div>
+          
+          <!-- Portfolio Item 3 -->
+          <div class="portfolio-item" data-category="Admin">
+              <img src="assets/FitTrack/AdminHome.png" alt="Admin home dashboard">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">Admin</div>
+                  <h3 class="portfolio-title">Admin Dashboard</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 4 -->
+          <div class="portfolio-item" data-category="User">
+              <img src="assets/FitTrack/UserHome.png" alt="User home dashboard">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">User</div>
+                  <h3 class="portfolio-title">User Dashboard</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 5 -->
+          <div class="portfolio-item" data-category="Admin">
+              <img src="assets/FitTrack/AdminAlerts.png" alt="Admin alerts">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">Admin</div>
+                  <h3 class="portfolio-title">Alerts</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 6 -->
+          <div class="portfolio-item" data-category="User">
+              <img src="assets/FitTrack/UserAlerts.png" alt="User alerts">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">User</div>
+                  <h3 class="portfolio-title">Alerts</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 7 -->
+          <div class="portfolio-item" data-category="Admin">
+              <img src="assets/FitTrack/AdminUsers.png" alt="Admin users management">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">Admin</div>
+                  <h3 class="portfolio-title">User Management</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 8 -->
+          <div class="portfolio-item" data-category="User">
+              <img src="assets/FitTrack/UserProfile.png" alt="User profile">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">User</div>
+                  <h3 class="portfolio-title">User Profile</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 9 -->
+          <div class="portfolio-item" data-category="Admin">
+              <img src="assets/FitTrack/AdminHistory.png" alt="Admin History">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">Admin</div>
+                  <h3 class="portfolio-title">History</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 10 -->
+          <div class="portfolio-item" data-category="User">
+              <img src="assets/FitTrack/UserHistory.png" alt="User History">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">User</div>
+                  <h3 class="portfolio-title">History</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 11 -->
+          <div class="portfolio-item" data-category="User">
+              <img src="assets/FitTrack/UserQR.png" alt="QR Scanner">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">User</div>
+                  <h3 class="portfolio-title">QR Scanner</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 12 -->
+          <div class="portfolio-item" data-category="Admin">
+              <img src="assets/FitTrack/AdminReports.png" alt="Reports & Graphs">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">Admin</div>
+                  <h3 class="portfolio-title">Reports & Graphs</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 13 -->
+          <div class="portfolio-item" data-category="User">
+              <img src="assets/FitTrack/UserCashIn.png" alt="User QR Cash-in">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">User</div>
+                  <h3 class="portfolio-title">QR Cash-in</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 14 -->
+          <div class="portfolio-item" data-category="Admin">
+              <img src="assets/FitTrack/AdminWorkouts.png" alt="Workout Manangement">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">Admin</div>
+                  <h3 class="portfolio-title">Workout Manangement</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 15 -->
+          <div class="portfolio-item" data-category="User">
+              <img src="assets/FitTrack/UserProfile.png" alt="User QR Cash-in">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">General</div>
+                  <h3 class="portfolio-title">Profile</h3>
+              </div>
+          </div>
+
+          <!-- Portfolio Item 16 -->
+          <div class="portfolio-item" data-category="Admin">
+              <img src="assets/FitTrack/AdminFiles.png" alt="Files Management">
+              <div class="portfolio-overlay">
+                  <div class="portfolio-category-label">Admin</div>
+                  <h3 class="portfolio-title">Files Management</h3>
+              </div>
+          </div>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div class="pagination-controls">
+          <button id="prev-page" class="pagination-btn">Previous</button>
+          <div id="pagination-numbers"></div>
+          <button id="next-page" class="pagination-btn">Next</button>
+      </div>
+    </div>
+    
+    <!-- Modal for portfolio items -->
+    <div id="portfolio-modal" class="portfolio-modal">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div class="modal-image-container">
+          <img id="modal-image" class="modal-image" src="" alt="Portfolio image">
+        </div>
+        <div class="modal-description">
+          <div class="modal-category" id="modal-category"></div>
+          <h3 class="modal-title" id="modal-title"></h3>
+          <p id="modal-description"></p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+      <div class="container">
+        <p class="mb-0">Special Thanks to <strong>SnapFolio</strong>.</p>
+        <p class="mb-0 small">Designed by <a href="https://bootstrapmade.com/bootstrap-portfolio-templates/" class="text-primary">Bootstrap Made</a></p>
+        <p class="mb-0 small">Edited/Personalized by: JR G. Pactor</p>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- Back to Top Button -->
+  <a href="#about" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Simple JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Pagination variables
+        const itemsPerPage = 6;
+        let currentPage = 1;
+        let filteredItems = [];
+        let currentCategory = 'all';
+        
+        // DOM elements
+        const portfolioGrid = document.getElementById('portfolio-grid');
+        const portfolioItems = portfolioGrid.querySelectorAll('.portfolio-item');
+        const categoryButtons = document.querySelectorAll('.portfolio-category');
+        const prevButton = document.getElementById('prev-page');
+        const nextButton = document.getElementById('next-page');
+        const paginationNumbers = document.getElementById('pagination-numbers');
+        
+        // Modal elements
+        const modal = document.getElementById('portfolio-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCategory = document.getElementById('modal-category');
+        const modalDescription = document.getElementById('modal-description');
+        const modalClose = document.querySelector('.modal-close');
+        
+        // Portfolio item descriptions
+        const portfolioDescriptions = {
+            "Login": "The login screen provides secure access to the FitTrack application. Users can enter their credentials to access either the user or admin interface depending on their role.",
+            "Registration": "New users can create an account by providing their personal details, email, and password. The registration process includes verification to ensure security.",
+            "Admin Dashboard": "The admin dashboard provides an overview of gym activity, including total members, active sessions, revenue, and other key metrics. Administrators can easily navigate to different management sections.",
+            "User Dashboard": "The user dashboard shows personal fitness stats, upcoming classes, membership status, and quick access to key features like check-in and payment options.",
+            "Alerts": "The alerts system notifies both admins and users about important events such as membership expiration, upcoming maintenance, or new announcements.",
+            "User Management": "Administrators can manage gym members, view their profiles, track activity, and modify membership details when necessary.",
+            "User Profile": "Users can view and edit their personal information, membership details, and preferences in their profile section.",
+            "History": "Both users and administrators can access historical data about gym visits, payments, and fitness progress over time.",
+            "QR Scanner": "The QR scanning feature allows for quick check-ins and payments by simply scanning a QR code at the gym entrance.",
+            "Reports & Graphs": "Administrators can generate and view detailed reports and visual representations of gym performance, member activity, and revenue.",
+            "QR Cash-in": "Users can add funds to their gym account by scanning a QR code, making payments quick and convenient.",
+            "Workout Manangement": "Administrators can create, edit, and assign workout routines to members based on their fitness goals and preferences.",
+            "Profile": "The profile section allows users to manage their personal information, view fitness progress, and update account settings.",
+            "Files Management": "Administrators can manage important documents, member agreements, and other files needed for gym operations."
+        };
+        
+        // Initialize
+        filterItems('all');
+        
+        // Set up portfolio item click handlers
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const title = this.querySelector('.portfolio-title').textContent;
+                const category = this.querySelector('.portfolio-category-label').textContent;
+                
+                // Set modal content
+                modalImage.src = img.src;
+                modalImage.alt = img.alt;
+                modalTitle.textContent = title;
+                modalCategory.textContent = category;
+                modalDescription.textContent = portfolioDescriptions[title] || 
+                    "This feature is part of the FitTrack application, designed to improve gym management and user experience.";
+                
+                // Show modal
+                modal.style.display = 'block';
+                
+                // Prevent scrolling on the body
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modal when clicking on X
+        modalClose.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside the content
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Event listeners for category buttons
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                // Get category from data attribute
+                const category = this.getAttribute('data-category');
+                // Filter items
+                filterItems(category);
+            });
+        });
+        
+        // Event listeners for pagination
+        prevButton.addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayItems();
+                updatePaginationButtons();
+            }
+        });
+        
+        nextButton.addEventListener('click', function() {
+            const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayItems();
+                updatePaginationButtons();
+            }
+        });
+        
+        // Function to filter items based on category
+        function filterItems(category) {
+            currentCategory = category;
+            currentPage = 1;
+            
+            // Filter items based on category
+            if (category === 'all') {
+                filteredItems = Array.from(portfolioItems);
+            } else {
+                filteredItems = Array.from(portfolioItems).filter(item => {
+                    return item.getAttribute('data-category') === category;
+                });
+            }
+            
+            // Display items and update pagination
+            displayItems();
+            updatePaginationButtons();
+        }
+        
+        // Function to display items for current page
+        function displayItems() {
+            // Hide all items
+            portfolioItems.forEach(item => {
+                item.style.display = 'none';
+            });
+            
+            // Calculate start and end index for current page
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredItems.length);
+            
+            // Display items for current page
+            for (let i = startIndex; i < endIndex; i++) {
+                filteredItems[i].style.display = 'block';
+            }
+        }
+        
+        // Function to update pagination buttons
+        function updatePaginationButtons() {
+            const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+            
+            // Update prev/next buttons
+            prevButton.disabled = currentPage === 1;
+            nextButton.disabled = currentPage === totalPages;
+            
+            // Create pagination numbers
+            paginationNumbers.innerHTML = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('div');
+                pageButton.classList.add('page-number');
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.textContent = i;
+                pageButton.addEventListener('click', function() {
+                    currentPage = i;
+                    displayItems();
+                    updatePaginationButtons();
+                });
+                paginationNumbers.appendChild(pageButton);
+            }
+        }
+        
+        // Add keyboard support for modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+  </script>
+</body>
+</html>
