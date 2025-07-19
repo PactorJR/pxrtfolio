@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SnapFolio - Personal Portfolio Template</title>
+  <title>JR Pactor - Personal Portfolio</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome for icons -->
@@ -126,18 +126,14 @@
         }
         
     .hero h2 span {
-        background: var(--primary-color);
+        background: linear-gradient(to right, var(--primary-color), #d4b995);
         -webkit-background-clip: text;
-        background-clip: text; 
         -webkit-text-fill-color: transparent;
-        color: var(--primary-color); 
         text-decoration: underline;
-        text-decoration-color: var(--primary-color);
+        text-decoration-color: var(--primary-color, #d4b995);
         text-underline-offset: 7px;
         padding: 5px 2px;
         border-radius: 0px;
-        display: inline-block;
-        min-width: 10px;
     }
 
     @keyframes blink {
@@ -149,9 +145,9 @@
         display: inline-block;
         width: 2px;
         height: 24px;
+        background-color: #333;
         margin-left: 5px;
         animation: blink 0.7s infinite;
-        vertical-align: middle; 
     }
     
     .hero p {
@@ -1026,7 +1022,8 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <h1>My<span>Portfolio</span></h1>
-            <h2>I'm a <span id="typing-text"></span><span class="cursor"></span></h2>
+            <h2>I'm a <span id="typing-text"></span></h2>
+            <span class="cursor"></span>
             <p>Passionate about creating exceptional digital experiences that blend innovative design with functional development. Let's bring your vision to life.</p>
             
             <div class="d-flex flex-wrap">
@@ -1382,7 +1379,7 @@
           
           <!-- Portfolio Item 2 -->
           <div class="portfolio-item">
-            <img src="assets/InvSys/InvSysPC_Folio.png" alt="Inventory System Logo">
+            <img src="assets/img/InvSys_Logo.png" alt="Inventory System Logo">
             <div class="portfolio-overlay">
               <div class="portfolio-category-label">Web</div>
               <h3 class="portfolio-title">Library Inventory System</h3>
@@ -1394,10 +1391,10 @@
           
           <!-- Portfolio Item 3 -->
           <div class="portfolio-item">
-            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%23e6f2ff' width='400' height='300'/%3E%3Crect fill='%23ffffff' x='140' y='80' width='120' height='30'/%3E%3Crect fill='%23d9b38c' x='160' y='110' width='80' height='150'/%3E%3Cellipse fill='%2387ceeb' cx='200' cy='70' rx='60' ry='20'/%3E%3Cpath fill='%23ffffff' d='M180,50 Q200,20 220,50 Z'/%3E%3C/svg%3E" alt="Paintbrush with flowers">
+            <img src="assets/img/ClassSys_Logo.png" alt="Paintbrush with flowers">
             <div class="portfolio-overlay">
               <div class="portfolio-category-label">Web</div>
-              <h3 class="portfolio-title">Classrom Monitoring System</h3>
+              <h3 class="portfolio-title">Classroom Monitoring System</h3>
               <div class="portfolio-actions">
                 <a href="ClassroomSystem.html" class="action-button"><i class="fas fa-arrow-right"></i></a>
               </div>
@@ -1555,6 +1552,8 @@
       }
     })
     .then(() => {
+        // Note: with mode: 'no-cors', we can't access the response body
+        // So we just assume success if no error is thrown
         
         // Reset form
         document.getElementById('contactForm').reset();
@@ -1572,60 +1571,47 @@
         statusDiv.innerHTML = '<p class="text-danger">Something went wrong. Please try again later or contact me directly via email.</p>';
       });
     });
-
     document.addEventListener('DOMContentLoaded', function() {
-    // Alternative typing animation
-    const typingElement = document.getElementById('typing-text');
-    const cursorElement = document.querySelector('.cursor');
-    const phrases = ["Web Developer", "App Developer", "Back-end Developer"];
-    
-    if (typingElement && cursorElement) {
-      let phraseIndex = 0;
+    // Typing animation code (unchanged)
+    const typingTextElement = document.getElementById('typing-text');
+    if (typingTextElement) {
+      const phrases = ["Web Developer", "App Developer", "Back-end Developer"];
+      let currentPhraseIndex = 0;
+      let isTyping = true;
       let charIndex = 0;
-      let isDeleting = false;
-      let isWaiting = false;
       
-      function type() {
-        const currentPhrase = phrases[phraseIndex];
+      function typeAndErase() {
+        const currentPhrase = phrases[currentPhraseIndex];
         
-        // Set delay based on current state
-        let delay = isDeleting ? 50 : 150;
-        
-        if (isWaiting) {
-          delay = 1500; // Longer delay when phrase is complete
-          isWaiting = false;
-        }
-        
-        // Update text
-        if (isDeleting) {
-          // Remove characters
-          typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
-          charIndex--;
+        if (isTyping) {
+          // Typing phase
+          if (charIndex < currentPhrase.length) {
+            typingTextElement.textContent += currentPhrase.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeAndErase, Math.random() * 100 + 100);
+          } else {
+            // When done typing, pause then start erasing
+            isTyping = false;
+            setTimeout(typeAndErase, 2000); // Pause for 2 seconds before erasing
+          }
         } else {
-          // Add characters
-          typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
-          charIndex++;
+          // Erasing phase
+          if (charIndex > 0) {
+            typingTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(typeAndErase, Math.random() * 50 + 50); // Erase faster than typing
+          } else {
+            // When done erasing, move to next phrase and start typing again
+            isTyping = true;
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            setTimeout(typeAndErase, 500); // Small pause before typing next phrase
+          }
         }
-        
-        // Check for state changes
-        if (!isDeleting && charIndex === currentPhrase.length) {
-          // Completed typing the phrase
-          isWaiting = true;
-          isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-          // Completed deleting the phrase
-          isDeleting = false;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-        }
-        
-        // Continue the loop
-        setTimeout(type, delay);
       }
       
       // Start the typing animation
-      type();
+      setTimeout(typeAndErase, 1000);
     }
-
 
     // Enhanced smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
