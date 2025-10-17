@@ -1458,6 +1458,16 @@
               <h3 class="contact-form-title">Get In Touch</h3>
               <p class="contact-form-desc">Available for freelance work, collaborations, and tech partnerships.</p>
               
+              <!-- Success Message -->
+              <div id="success-message" class="alert alert-success" style="display: none;">
+                <strong>Success!</strong> Your message has been sent successfully. I'll get back to you soon!
+              </div>
+              
+              <!-- Error Message -->
+              <div id="error-message" class="alert alert-danger" style="display: none;">
+                <strong>Error!</strong> Something went wrong. Please try again.
+              </div>
+              
               <form id="contactForm">
                 <div class="row">
                   <div class="col-md-6">
@@ -1474,7 +1484,6 @@
                 
                 <div class="text-center mt-4">
                   <button type="submit" class="send-message-btn" id="submitBtn">Send Message</button>
-                  <div id="formStatus" class="mt-3"></div>
                 </div>
               </form>
             </div>
@@ -1503,6 +1512,63 @@
   
   <!-- Smooth Scroll JavaScript -->
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactForm');
+      const successMessage = document.getElementById('success-message');
+      const errorMessage = document.getElementById('error-message');
+      
+      // Your deployed Google Apps Script web app URL
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxUoT-EiXVo-noUcIGSSXHt9f4A0xczGDhLbw_76C9iddYS9CzAZosFivg03y0qo_RdKg/exec';
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Hide any previous messages
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
+        
+        // Show loading state
+        const submitBtn = document.getElementById('submitBtn');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+        
+        // Collect form data
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
+        });
+        
+        // Send data to Google Apps Script
+        fetch(scriptURL, {
+          method: 'POST',
+          mode: 'no-cors', // Important! Bypasses CORS block from Google
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(() => {
+          // Even though we can't read the response (because of no-cors),
+          // we assume success if no fetch error occurs.
+          form.reset();
+          successMessage.style.display = 'block';
+          successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(error => {
+          // Show error message if something truly fails
+          errorMessage.textContent = 'Error: ' + error.message;
+          errorMessage.style.display = 'block';
+          console.error('Error!', error.message);
+        })
+        .finally(() => {
+          // Always reset button state
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        });
+      });
+    });
     function downloadCV() {
       const link = document.createElement('a');
       link.href = 'assets/CV/CV.pdf';
@@ -1513,10 +1579,6 @@
     }
     document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    // Change status to sending
-    const statusDiv = document.getElementById('formStatus');
-    statusDiv.innerHTML = '<p class="text-info">Sending your message...</p>';
     
     // Get form data
     const name = document.getElementById('name').value;
